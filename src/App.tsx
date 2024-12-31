@@ -1,5 +1,5 @@
 // React hooks & dependencies
-import { createContext } from 'react'
+import { createContext, useState } from 'react'
 
 // Static assets
 import './App.css'
@@ -8,9 +8,11 @@ import './App.css'
 import UserSearch from './UserSearch/UserSearch'
 
 // Export the context to use in other components with empty object as default value
-export const apiContext = createContext({})
+export const ApiContext = createContext({})
+export const UserContext = createContext(null)
 
 function App() {
+  const [user, setUser] = useState(null)
 
   // API endpoint for user search
   function userSearchAPIendpoint(q:string): string {
@@ -24,9 +26,19 @@ function App() {
 
   return (
     <>
-      <apiContext.Provider value={apiEndpoints}>
-        <UserSearch />
-      </apiContext.Provider>
+      <ApiContext.Provider value={apiEndpoints}>
+        <UserContext.Provider value={{user, setUser}}>
+
+          {/* If there's no user set, show user search */}
+          {!user ? 
+            /* Search */
+            <UserSearch /> : 
+
+            <></>
+          }
+            
+        </UserContext.Provider>
+      </ApiContext.Provider>
     </>
   )
 }
