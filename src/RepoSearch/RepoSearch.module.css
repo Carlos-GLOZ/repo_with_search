@@ -1,0 +1,40 @@
+.repoSearch_wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+  margin-top: 120px;
+}
+.repoSearch_container {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+.repoSearch_userInfo_container {
+  display: flex;
+  flex-direction: column;
+}
+.repoSearch_userInfo_container img {
+  height: 260px;
+  aspect-ratio: 1;
+  border: solid 2px #3d444d;
+  border-radius: 130px;
+}
+.repoSearch_userInfo_name {
+  font-size: 24px;
+}
+.repoSearch_userInfo_visitButton {
+  background-color: #212830;
+  border: solid 2px #3d444d;
+  font-weight: 500;
+  font-size: 14px;
+  transition-property: 0.3s;
+}
+.repoSearch_userInfo_visitButton:hover {
+  background-color: #262c36;
+  border-color: #3d444d;
+}
+.repoSearch_repoList_container {
+  display: flex;
+  flex-direction: column;
+  width: 896px;
+}

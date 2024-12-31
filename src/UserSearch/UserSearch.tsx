@@ -114,7 +114,11 @@ function UserSearch() {
                         <input type="text" name="user-search_input" id={styles.userSearch_input} value={inputValue} onChange={handleUserSearchInputChange} placeholder="Username"/>
             
                         <div id={styles.userSearch_previewBox}>
-                            
+                            {/* <SearchResultPreview key="1" user={ {avatar_url: "https://avatars.githubusercontent.com/u/102754279?v=4", login: "User", repos_url: "https://api.github.com/users/Carlos-GLOZ/repos"} }/>
+                            <SearchResultPreview key="2" user={ {avatar_url: "https://avatars.githubusercontent.com/u/102754279?v=4", login: "User", repos_url: "https://api.github.com/users/Carlos-GLOZ/repos"} }/>
+                            <SearchResultPreview key="2" user={ {avatar_url: "https://avatars.githubusercontent.com/u/102754279?v=4", login: "User", repos_url: "https://api.github.com/users/Carlos-GLOZ/repos"} }/>
+                            <SearchResultPreview key="2" user={ {avatar_url: "https://avatars.githubusercontent.com/u/102754279?v=4", login: "User", repos_url: "https://api.github.com/users/Carlos-GLOZ/repos"} }/>
+                            <SearchResultPreview key="2" user={ {avatar_url: "https://avatars.githubusercontent.com/u/102754279?v=4", login: "User", repos_url: "https://api.github.com/users/Carlos-GLOZ/repos"} }/> */}
                         </div>
                     </div>
                 </div>

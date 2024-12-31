@@ -12,7 +12,7 @@ import styles from './SearchResultPreview.module.css'
 import { UserContext } from '../../App';
 
 
-function SearchResultPreview({ user }) {
+function SearchResultPreview({ user }:any) {
 
     const [repoAmount, setRepoAmount] = useState(0)
     
