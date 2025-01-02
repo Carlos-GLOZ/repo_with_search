@@ -1,0 +1,62 @@
+.repoFilters_wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 10px;
+}
+.repoFilters_name {
+  width: -webkit-fill-available;
+  padding: 5px 10px;
+  border: 1px solid #3d444d;
+  border-radius: 6px;
+  background-color: transparent;
+  line-height: 20px;
+  color: #f0f6fc;
+}
+.repoFilters_language {
+  background-color: #151b23;
+  border: solid 2px #3d444d;
+  font-weight: 500;
+  font-size: 14px;
+  transition-property: 0.3s;
+  border-radius: 6px;
+}
+.repoFilters_selectedLanguage {
+  padding: 5px 16px;
+  border-radius: 6px;
+  background-color: #262c36;
+  display: flex;
+  flex-direction: row;
+  gap: 7px;
+  align-items: center;
+}
+.repoFilters_selectedLanguage img {
+  filter: invert();
+  width: 7px;
+  opacity: 50%;
+}
+.repoFilters_selectedLanguage:hover {
+  border-color: currentColor;
+  background-color: #262c36;
+}
+#repoFilters_language_optionContainer {
+  display: none;
+  width: 300px;
+  position: absolute;
+  transform: translateY(10px);
+  flex-direction: column;
+  border-radius: 6px;
+  border: solid 2px #3d444d;
+  border-top: none;
+}
+#repoFilters_language_optionContainer button {
+  border: none;
+  border-radius: 0;
+  border-top: solid 2px #3d444d;
+  background-color: #151b23;
+  text-align: left;
+}
+#repoFilters_language_optionContainer button:hover {
+  background-color: #252c34;
+}

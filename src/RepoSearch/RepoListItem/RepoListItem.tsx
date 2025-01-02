@@ -1,4 +1,5 @@
 // React hooks & dependencies
+import PropTypes from 'prop-types'
 
 // Static assets
 import styles from "./RepoListItem.module.css"
@@ -10,6 +11,7 @@ import languageColors from "../../assets/repo_language_colors.json"
 
 
 function RepoListItem({ repo }:any) {
+    const languageColor = languageColors[repo.language]
 
     function Capitalize(s:string) {
         return s[0].toUpperCase() + s.slice(1);
@@ -28,7 +30,7 @@ function RepoListItem({ repo }:any) {
                 </div>
 
                 <div className={styles.repoListItem_info}>
-                    <div className={styles.repoListItem_info_languageColor} style={{backgroundColor:languageColors[repo.language]}}></div>
+                    <div className={styles.repoListItem_info_languageColor} style={{backgroundColor:languageColor}}></div>
                     <p className={styles.repoListItem_info_language}>{repo.language}</p>
                 </div>
 

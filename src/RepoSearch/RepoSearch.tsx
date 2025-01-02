@@ -1,18 +1,24 @@
 // React hooks & dependencies
-import { useContext, useEffect, useRef, useState } from "react";
+import { createContext, useContext, useEffect, useRef, useState } from "react";
 import axios from "axios";
 
 // Static assets
 import styles from "./RepoSearch.module.css"
 
 // Components
+import RepoFilters from "./RepoFilters/RepoFilters";
+import RepoListItem from "./RepoListItem/RepoListItem";
 
 // Context
-import { ApiContext, UserContext } from "../App";
-import RepoListItem from "./RepoListItem/RepoListItem";
+    // Imports
+    import { ApiContext, UserContext } from "../App";
+
+    // Exports
+    export const SearchFilterVariablesContext = createContext({})
 
 function RepoSearch() {
     const [repos, setRepos] = useState([])
+    const [filteredRepos, setFilteredRepos] = useState([])
     const languages = useRef([])
     
     const apiEndpoints: any = useContext(ApiContext)
@@ -20,6 +26,27 @@ function RepoSearch() {
 
     const userReposAPIendpoint = apiEndpoints['userReposAPIendpoint']
     const selectedUserReposAPIendpoint = userReposAPIendpoint(selectedUser.user.login)
+
+    /**
+     * Search filter variables
+     */
+
+        // State variables
+        const [nameFilter, setNameFilter] = useState("")
+        const [languageFilter, setLanguageFilter] = useState("")
+
+        // Object to pass as context
+        const filterStateVariablesObject = {
+            'name': {
+                'value': nameFilter,
+                'set': setNameFilter
+            },
+
+            'language': {
+                'value': languageFilter,
+                'set': setLanguageFilter
+            }
+        }
 
     /**
      * Effects
@@ -33,6 +60,7 @@ function RepoSearch() {
                             const repos = response.data
 
                             setRepos(repos)
+                            setFilteredRepos(repos)
                             
                             for (let i = 0; i < repos.length; i++) {
                                 const repo = repos[i];
@@ -48,6 +76,27 @@ function RepoSearch() {
             
         }, []); // Runs only on mount
 
+        // Update repos to show based on filters
+        useEffect(() => {
+            
+            const matchingRepos: never[] = []
+
+            const nameRegex = new RegExp(nameFilter, 'i')
+            const languageRegex = new RegExp(languageFilter, 'i')
+            
+
+            for (let i = 0; i < repos.length; i++) {
+                const repo = repos[i];
+
+                if ((nameRegex.test(repo.name)) && (languageRegex.test(repo.language))) {
+                    matchingRepos.push(repo)
+                    
+                }
+            }
+
+            setFilteredRepos(matchingRepos)
+
+        }, [nameFilter, languageFilter])
 
 
     /**
@@ -73,9 +122,17 @@ function RepoSearch() {
 
                 {/* Repository list */}
                 <div className={styles.repoSearch_repoList_container}>
-                    {repos.map((repo, index) => (
-                        <RepoListItem key={index} repo={repo}/>
-                    ))}
+
+                    {/* Search filters */}
+                    <SearchFilterVariablesContext.Provider value={filterStateVariablesObject} >
+                        <RepoFilters languages={languages.current}/>
+                    </SearchFilterVariablesContext.Provider>
+
+                    <div>
+                        {filteredRepos.map((repo, index) => (
+                            <RepoListItem key={index} repo={repo}/>
+                        ))}
+                    </div>
                 </div>
             </div>
         </div>

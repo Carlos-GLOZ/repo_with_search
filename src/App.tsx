@@ -1,5 +1,5 @@
 // React hooks & dependencies
-import { createContext, useState } from 'react'
+import { createContext, useRef, useState } from 'react'
 
 // Static assets
 import './App.css'
@@ -11,9 +11,14 @@ import RepoSearch from './RepoSearch/RepoSearch'
 // Export the context to use in other components with empty object as default value
 export const ApiContext = createContext({})
 export const UserContext = createContext(null)
+export const AppContext = createContext({}) // Generic context for independent global variables and the like
 
 function App() {
   const [user, setUser] = useState(null)
+
+  const internalFocusTarget = useRef(null)
+
+  const githubAPIuserAgent = 'Carlos-GLOZ'
 
   /**
    * API endpoints
@@ -35,22 +40,52 @@ function App() {
       'userReposAPIendpoint': userReposAPIendpoint
     }
 
+    // Utils
+    const appContextUtils = {
+      'internalFocusTarget': internalFocusTarget,
+      'userAgent': githubAPIuserAgent
+    }
+  
+  /**
+   * Handlers
+   */
+    
+    // Run when a click is made in the page
+    function handleGlobalClick(e:any) {
+      // Check if click target is equal to internalFocusTarget, if not, reset
+      // This is for when I want an element to hide if I click outside of it (like a dropdown menu)
+      
+      if (internalFocusTarget.current !== e.target) {
+        switch (internalFocusTarget.current.dataset.bluraction) {
+          case 'hide':
+            internalFocusTarget.current.style.display = 'none'
+            internalFocusTarget.current = e.target
+            break;
+        
+          default:
+            break;
+        }
+      }
+    }
+
   return (
-    <>
-      <ApiContext.Provider value={apiEndpoints}>
-        <UserContext.Provider value={{'user': user, 'setUser': setUser}}>
+    <div ref={internalFocusTarget} onClick={handleGlobalClick} style={{height:'100vh'}}>
+      <AppContext.Provider value={appContextUtils}>
+        <ApiContext.Provider value={apiEndpoints}>
+          <UserContext.Provider value={{'user': user, 'setUser': setUser}}>
 
-          {/* If there's no user set, show user search */}
-          {!user ? 
-            /* Search */
-            <UserSearch /> : 
+            {/* If there's no user set, show user search */}
+            {!user ? 
+              /* Search */
+              <UserSearch /> : 
 
-            <RepoSearch />
-          }
-            
-        </UserContext.Provider>
-      </ApiContext.Provider>
-    </>
+              <RepoSearch />
+            }
+              
+          </UserContext.Provider>
+        </ApiContext.Provider>
+      </AppContext.Provider>
+    </div>
   )
 }
 

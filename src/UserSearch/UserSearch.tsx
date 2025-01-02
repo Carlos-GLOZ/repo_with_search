@@ -11,7 +11,7 @@ import loadingGif from "../assets/loading.gif"
 import SearchResultPreview from "./SearchResultPreview/SearchResultPreview";
 
 // Context
-import { ApiContext } from "../App";
+import { ApiContext, AppContext } from "../App";
 import SearchResultPreviewLoading from "./SearchResultPreview/SearchResultPreviewLoading";
 
 function UserSearch() {
@@ -44,9 +44,15 @@ function UserSearch() {
             const delayDebounceFn = setTimeout(() => {
                 if (inputValue) {
                     let queryAPIendpoint: string = userSearchAPIendpoint(inputValue)
+
+                    const params = {
+                        headers: {
+                            'User-Agent': appUtils.userAgent
+                        }
+                    }
         
                     // Send request
-                    axios.get(queryAPIendpoint)
+                    axios.get(queryAPIendpoint, params)
                         .then(response => {
                             requestError.current = false
                             setUsers(response.data.items)  
