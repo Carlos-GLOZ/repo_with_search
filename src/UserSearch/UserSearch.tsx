@@ -22,8 +22,11 @@ function UserSearch() {
     const requestError = useRef(false)
 
     const apiEndpoints: any = useContext(ApiContext)
+    const appUtils: any = useContext(AppContext)
 
     const userSearchAPIendpoint = apiEndpoints['userSearchAPIendpoint']
+
+    const inputDelay = 500;
 
     /**
      * Effects
@@ -56,7 +59,7 @@ function UserSearch() {
                         })
                     
                 }
-            }, 1000)
+            }, inputDelay)
             
             return () => {
                 clearTimeout(delayDebounceFn)
