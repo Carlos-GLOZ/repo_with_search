@@ -1,9 +1,9 @@
 // React hooks & dependencies
-import { createContext, useRef, useState } from 'react'
+import { createContext, useEffect, useRef, useState } from 'react'
+import axios from 'axios'
 
 // Static assets
 import './App.css'
-import AppConfig from "../config.json"
 
 // Components
 import UserSearch from './UserSearch/UserSearch'
@@ -16,8 +16,59 @@ export const AppContext = createContext({}) // Generic context for independent g
 
 function App() {
   const [user, setUser] = useState(null)
+  const [AppConfig, setAppConfig] = useState({})
 
   const internalFocusTarget:any = useRef(null)
+
+  const configFilePath = "../config.json"
+
+  /**
+   * Effects
+   */
+
+    // Handle optional use of config file
+    useEffect(() => {
+      axios.get(configFilePath)
+          .then(response => {
+            // Ideally I'd like to check for the response code,
+            // but React will always return a 200 status.
+            // So instead I check to see if the response data contains 
+            // a specific attribute would only be present in the config file
+            if (response.data.isAvailible) {
+              setAppConfig(response.data)
+            } else {
+
+              // Set default value for config
+              const defaultConfig = {
+                "gitHub": {
+                  "request_params": {
+                      "headers": {
+                          "Authorization": ""
+                      }
+                  }
+                }
+              }
+  
+              setAppConfig(defaultConfig)
+            }
+            
+          })
+          .catch(_error => {
+
+            // Set default value for config
+            const defaultConfig = {
+              "gitHub": {
+                "request_params": {
+                    "headers": {
+                        "Authorization": ""
+                    }
+                }
+              }
+            }
+
+            setAppConfig(defaultConfig)
+          })
+    }, []); // Runs only on mount
 
   /**
    * API endpoints
