@@ -1,9 +1,8 @@
 // React hooks & dependencies
-import PropTypes from 'prop-types'
 
 // Static assets
 import styles from "./RepoListItem.module.css"
-import languageColors from "../../assets/repo_language_colors.json"
+import languageColorsObject from "../../assets/repo_language_colors.json"
 
 // Components
 
@@ -11,6 +10,9 @@ import languageColors from "../../assets/repo_language_colors.json"
 
 
 function RepoListItem({ repo }:any) {
+
+    // Strongly type language colors to stop TS from complaining
+    const languageColors: { [key:string]:string } = languageColorsObject
     const languageColor = languageColors[repo.language]
 
     function Capitalize(s:string) {
