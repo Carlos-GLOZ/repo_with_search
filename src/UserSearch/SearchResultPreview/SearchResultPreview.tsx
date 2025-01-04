@@ -19,9 +19,6 @@ function SearchResultPreview({ user }:any) {
     const selectedUser: any = useContext(UserContext)
     const appUtils: any = useContext(AppContext)
 
-    console.log(appUtils);
-
-
     /**
      * Effects
      */
