@@ -24,8 +24,14 @@ function SearchResultPreview({ user }:any) {
      */
         // Send API query when user types in a name
         useEffect(() => {
-
-            const params = appUtils.appConfig.gitHub.request_params
+            
+            // Try to retrieve request parameters, default to empty object if impossible
+            let params: object;
+            try {
+                params = appUtils.appConfig.gitHub.request_params
+            } catch (error) {
+                params = {}
+            }
 
             // Get amount of repositories of user
             axios.get(user.repos_url, params)
