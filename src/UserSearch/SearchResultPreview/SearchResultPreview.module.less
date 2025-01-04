@@ -1,0 +1,112 @@
+
+.resultPreview_wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+    height: fit-content;
+    align-items: center;
+    border-top: solid 1px;
+    padding: 15px 10px;
+}
+
+.resultPreview_wrapper:hover {
+    background-color: #212c3b;
+    cursor: pointer;
+}
+
+.resultPreview_imgWrapper {
+    img {
+        height: 100px;
+        border: none;
+        border-radius: 50px;
+    }
+}
+
+.resultPreview_name {
+    font-size: 40px;
+    margin: 0;
+}
+
+.resultPreview_repoAmount {
+    color: #acacac;
+    font-size: 20px;
+    margin: 0;
+}
+
+
+/**
+    Loading Component
+**/
+
+
+.resultPreviewLoading_wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+    height: fit-content;
+    align-items: center;
+    border-top: solid 1px;
+    padding: 15px 10px;
+
+    --loading-bg-color: #dfdfdf28;
+}
+
+.resultPreviewLoading_imgWrapper {
+    
+    div {
+        width: 100px;
+        aspect-ratio: 1;
+        border: none;
+        border-radius: 50px;
+
+        background-color: var(--loading-bg-color);
+        animation-name: loading_breathing;
+        animation-duration: 2.5s;
+        animation-iteration-count: infinite;
+    }
+}
+
+.resultPreviewLoading_nameWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.resultPreviewLoading_name {
+    font-size: 40px;
+    margin: 0;
+
+    width: 200px;
+    height: 40px;
+    background-color: var(--loading-bg-color);
+    border-radius: 50px;
+
+    background-color: var(--loading-bg-color);
+    animation-name: loading_breathing;
+    animation-duration: 2.5s;
+    animation-iteration-count: infinite;
+}
+
+.resultPreviewLoading_repoAmount {
+    color: #acacac;
+    font-size: 20px;
+    margin: 0;
+
+    width: 300px;
+    height: 30px;
+    background-color: var(--loading-bg-color);
+    border-radius: 50px;
+
+    background-color: var(--loading-bg-color);
+    animation-name: loading_breathing;
+    animation-duration: 2.5s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes loading_breathing {
+    0% {opacity: 1;}
+    50% {opacity: 0.1;}
+    100% {opacity: 1;}
+}
