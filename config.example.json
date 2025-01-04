@@ -1,0 +1,11 @@
+{
+    "isAvailible": true,
+    "gitHub": {
+        "token": "GitHub_REST_API_Token",
+        "request_params": {
+            "headers": {
+                "Authorization": "GitHub_REST_API_Token"
+            }
+        }
+    }
+}
