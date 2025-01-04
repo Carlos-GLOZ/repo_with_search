@@ -1,50 +1,30 @@
-# React + TypeScript + Vite
+# User repository search
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Allow the user to browse through a list of a user's GitHub repositories.
+The list will be filtered according to the given name and programming language.
 
-Currently, two official plugins are available:
+You can see it in action [here](https://carlosgiraldolozano.com).
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Setup
 
-## Expanding the ESLint configuration
+The project makes use of a `config.json` file, which is not incuded in the repository. 
+This file contains the API token for the GitHub REST API. As this token is optional when making requests, so is the `config.json` file.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+The token allows, among other things, for a higher rate of requests per hour to the GitHub API; if you'd like to set it up, you can learn more through the official [GitHub Documentation](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens). You can use the provided `config.example.json` file as a guideline for your new configuration file; replace any instances of `GitHub_REST_API_Token` with your Personal Access Token.
 
-- Configure the top-level `parserOptions` property like this:
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## Running the project
+
+Make sure to have [Node.js](https://nodejs.org) installed on your system.
+
+Open a terminal window and navigate to the root of your project. Once there, execute:
 ```
+npm run dev
+``` 
+to run your project on a development environment.
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## Future improvements
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+- Additional filters for user search
+- Additional filters for repository search
+- Add GitHub login to allow authorised users to see private repositories
