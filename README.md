@@ -3,7 +3,7 @@
 Allow the user to browse through a list of a user's GitHub repositories.
 The list will be filtered according to the given name and programming language.
 
-You can see it in action [here](https://carlosgiraldolozano.com).
+You can see it in action [here](https://reposearch.carlosgiraldolozano.com).
 
 ## Setup
 
