@@ -17,9 +17,9 @@ import RepoListItem from "./RepoListItem/RepoListItem";
     export const SearchFilterVariablesContext = createContext({})
 
 function RepoSearch() {
-    const [repos, setRepos] = useState([])
+    const [repos, setRepos]: [any, Function] = useState([])
     const [filteredRepos, setFilteredRepos] = useState([])
-    const languages = useRef([])
+    const languages: any = useRef([])
     
     const apiEndpoints: any = useContext(ApiContext)
     const selectedUser: any = useContext(UserContext)
@@ -73,7 +73,7 @@ function RepoSearch() {
                             }
                             
                         })
-                        .catch(error => {
+                        .catch(_error => {
                             setRepos([])
                         })
             
@@ -82,7 +82,7 @@ function RepoSearch() {
         // Update repos to show based on filters
         useEffect(() => {
             
-            const matchingRepos: never[] = []
+            const matchingRepos: any = []
 
             const nameRegex = new RegExp(nameFilter, 'i')
             const languageRegex = new RegExp(languageFilter, 'i')
@@ -106,7 +106,11 @@ function RepoSearch() {
      * Handlers
      */
     function handleClickVisitButton() {
-        window.open(selectedUser.user.html_url, '_blank').focus();
+        const newWindow = window.open(selectedUser.user.html_url, '_blank');
+
+        if (newWindow) {
+            newWindow.focus();
+        }
     }
 
 

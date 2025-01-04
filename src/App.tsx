@@ -11,13 +11,13 @@ import RepoSearch from './RepoSearch/RepoSearch'
 
 // Export the context to use in other components with empty object as default value
 export const ApiContext = createContext({})
-export const UserContext = createContext(null)
+export const UserContext = createContext({})
 export const AppContext = createContext({}) // Generic context for independent global variables and the like
 
 function App() {
   const [user, setUser] = useState(null)
 
-  const internalFocusTarget = useRef(null)
+  const internalFocusTarget:any = useRef(null)
 
   /**
    * API endpoints
@@ -33,6 +33,10 @@ function App() {
       return `https://api.github.com/users/${username}/repos`;
     }
 
+  /**
+   * Context objects
+   */
+
     // Collect API endpoints to pass to other components through context
     const apiEndpoints = {
       'userSearchAPIendpoint': userSearchAPIendpoint,
@@ -43,6 +47,12 @@ function App() {
     const appContextUtils = {
       'internalFocusTarget': internalFocusTarget,
       'appConfig': AppConfig
+    }
+
+    // User state variable
+    const userContextStateVariable = {
+      'user': user, 
+      'setUser': setUser
     }
   
   /**
@@ -71,7 +81,7 @@ function App() {
     <div ref={internalFocusTarget} onClick={handleGlobalClick} style={{height:'100vh'}}>
       <AppContext.Provider value={appContextUtils}>
         <ApiContext.Provider value={apiEndpoints}>
-          <UserContext.Provider value={{'user': user, 'setUser': setUser}}>
+          <UserContext.Provider value={userContextStateVariable}>
 
             {/* If there's no user set, show user search */}
             {!user ? 

@@ -19,8 +19,8 @@ function RepoFilters(props:any) {
     const searchFilterVariablesContext: any = useContext(SearchFilterVariablesContext)
     const appUtils: any = useContext(AppContext)
 
-    const languageSelectorButton = useRef(null)
-    const languageSelectorOptions = useRef(null)
+    const languageSelectorButton: any = useRef(null)
+    const languageSelectorOptions: any = useRef(null)
 
     /**
      * Handlers
@@ -31,7 +31,7 @@ function RepoFilters(props:any) {
         }
 
         // Show language options
-        function handleLanguageSelect(e:any) {
+        function handleLanguageSelect() {
             if (getComputedStyle(languageSelectorOptions.current).display == 'none') {
                 
                 languageSelectorOptions.current.style.display = 'flex'

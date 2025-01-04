@@ -32,7 +32,7 @@ function SearchResultPreview({ user }:any) {
                         .then(response => {
                             setRepoAmount(response.data.length)                                             
                         })
-                        .catch(error => {
+                        .catch(_error => {
                             setRepoAmount(0) 
                         })
             
