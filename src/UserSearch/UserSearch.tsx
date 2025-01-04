@@ -45,11 +45,7 @@ function UserSearch() {
                 if (inputValue) {
                     let queryAPIendpoint: string = userSearchAPIendpoint(inputValue)
 
-                    const params = {
-                        headers: {
-                            'User-Agent': appUtils.userAgent
-                        }
-                    }
+                    const params = appUtils.appConfig.gitHub.request_params
         
                     // Send request
                     axios.get(queryAPIendpoint, params)

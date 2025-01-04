@@ -9,7 +9,7 @@ import styles from './SearchResultPreview.module.css'
 
 
 // Context
-import { UserContext } from '../../App';
+import { UserContext, AppContext } from '../../App';
 
 
 function SearchResultPreview({ user }:any) {
@@ -17,6 +17,7 @@ function SearchResultPreview({ user }:any) {
     const [repoAmount, setRepoAmount] = useState(0)
     
     const selectedUser: any = useContext(UserContext)
+    const appUtils: any = useContext(AppContext)
 
     /**
      * Effects
@@ -24,8 +25,10 @@ function SearchResultPreview({ user }:any) {
         // Send API query when user types in a name
         useEffect(() => {
 
+            const params = appUtils.appConfig.gitHub.request_params
+
             // Get amount of repositories of user
-            axios.get(user.repos_url)
+            axios.get(user.repos_url, params)
                         .then(response => {
                             setRepoAmount(response.data.length)                                             
                         })

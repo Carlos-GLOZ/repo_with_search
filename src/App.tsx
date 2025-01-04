@@ -3,6 +3,7 @@ import { createContext, useRef, useState } from 'react'
 
 // Static assets
 import './App.css'
+import AppConfig from "../config.json"
 
 // Components
 import UserSearch from './UserSearch/UserSearch'
@@ -17,8 +18,6 @@ function App() {
   const [user, setUser] = useState(null)
 
   const internalFocusTarget = useRef(null)
-
-  const githubAPIuserAgent = 'Carlos-GLOZ'
 
   /**
    * API endpoints
@@ -43,7 +42,7 @@ function App() {
     // Utils
     const appContextUtils = {
       'internalFocusTarget': internalFocusTarget,
-      'userAgent': githubAPIuserAgent
+      'appConfig': AppConfig
     }
   
   /**

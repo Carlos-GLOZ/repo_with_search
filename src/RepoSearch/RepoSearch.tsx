@@ -11,7 +11,7 @@ import RepoListItem from "./RepoListItem/RepoListItem";
 
 // Context
     // Imports
-    import { ApiContext, UserContext } from "../App";
+    import { ApiContext, UserContext, AppContext } from "../App";
 
     // Exports
     export const SearchFilterVariablesContext = createContext({})
@@ -23,6 +23,7 @@ function RepoSearch() {
     
     const apiEndpoints: any = useContext(ApiContext)
     const selectedUser: any = useContext(UserContext)
+    const appUtils: any = useContext(AppContext)
 
     const userReposAPIendpoint = apiEndpoints['userReposAPIendpoint']
     const selectedUserReposAPIendpoint = userReposAPIendpoint(selectedUser.user.login)
@@ -52,10 +53,12 @@ function RepoSearch() {
      * Effects
      */
         // Send API query when user types in a name
-        useEffect(() => {            
+        useEffect(() => {          
+
+            const params = appUtils.appConfig.gitHub.request_params
 
             // Get amount of repositories of user
-            axios.get(selectedUserReposAPIendpoint)
+            axios.get(selectedUserReposAPIendpoint, params)
                         .then(response => {
                             const repos = response.data
 
