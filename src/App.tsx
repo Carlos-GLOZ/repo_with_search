@@ -28,6 +28,20 @@ function App() {
 
     // Handle optional use of config file
     useEffect(() => {
+      // Set default configuration
+      const defaultConfig = {
+        "gitHub": {
+          "request_params": {
+              "headers": {
+                  "Authorization": ""
+              }
+          }
+        }
+      }
+
+      setAppConfig(defaultConfig)
+
+      // Attempt to retrieve config from config file
       axios.get(configFilePath)
           .then(response => {
             // Ideally I'd like to check for the response code,
@@ -36,37 +50,8 @@ function App() {
             // a specific attribute would only be present in the config file
             if (response.data.isAvailible) {
               setAppConfig(response.data)
-            } else {
-
-              // Set default value for config
-              const defaultConfig = {
-                "gitHub": {
-                  "request_params": {
-                      "headers": {
-                          "Authorization": ""
-                      }
-                  }
-                }
-              }
-  
-              setAppConfig(defaultConfig)
             }
             
-          })
-          .catch(_error => {
-
-            // Set default value for config
-            const defaultConfig = {
-              "gitHub": {
-                "request_params": {
-                    "headers": {
-                        "Authorization": ""
-                    }
-                }
-              }
-            }
-
-            setAppConfig(defaultConfig)
           })
     }, []); // Runs only on mount
 

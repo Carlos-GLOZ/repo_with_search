@@ -44,7 +44,15 @@ function UserSearch() {
                 if (inputValue) {
                     let queryAPIendpoint: string = userSearchAPIendpoint(inputValue)
 
-                    const params = appUtils.appConfig.gitHub.request_params
+                    
+            
+                    // Try to retrieve request parameters, default to empty object if impossible
+                    let params: object;
+                    try {
+                        params = appUtils.appConfig.gitHub.request_params
+                    } catch (error) {
+                        params = {}
+                    }
         
                     // Send request
                     axios.get(queryAPIendpoint, params)
